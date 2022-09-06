@@ -25,7 +25,7 @@ public class HomeController {
 	
 	@GetMapping
 	public String home(Model model) {
-		Sort sort = Sort.by("b").ascending();
+		Sort sort = Sort.by("numero").ascending();
 		List<Aluno> alunos = alunoRepository.findAll(sort);
 		model.addAttribute("alunos", alunos);
 		return "home";
