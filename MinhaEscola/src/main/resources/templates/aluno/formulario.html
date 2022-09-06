@@ -1,0 +1,43 @@
+<html>
+	<head th:replace="~{base :: head}"></head>   <!-- acessando o fragmento de uma outra página (no caso, base.html) -->
+	<body>
+		<div th:replace="~{base :: logo}"></div>	
+		
+		<div class="container">
+			<div th:replace="~{base :: titulo('Novo(a) Aluno(a)')}"></div>
+			
+			<div class="card mt-3">
+				<form th:object="${requisicaoNovoAluno}" class="card-body" action="/aluno/novo" method="POST">  <!-- submeter os dados inseridos no formulário para aluno/novo, com o método POST -->
+
+<!-- para mostrar os erros de validação, o Thymeleaf possui atributos como th:object, th:field e th:errorClass -->
+					<div class="form-group">
+						<label for="nome">Aluno(a)</label>
+						<input th:field="*{nome}" th:errorclass="is-invalid" class="form-control" name="nome" placeholder="nome do(a) aluno(a)"/>
+						<small>Informe qual o nome do aluno</small>
+						<div class="invalid-feedback" th:errors="*{nome}">Erros do nome do aluno</div>
+					</div>
+				
+					<div class="form-group">
+						<label for="idade">Idade</label>
+						<input th:field="*{idade}" th:errorclass="is-invalid" class="form-control" name="idade" placeholder="idade do(a) aluno(a)"/>
+					</div>
+					
+					<div class="form-group">
+						<label for="descricao">Descrição</label>
+						<textarea td:field="*{descricao}" class="form-control" name="descricao" placeholder="Comportamento do(a) aluno(a)"></textarea>
+					</div>
+					
+					<div class="form-group">
+						<label for="imagem">Imagem</label>
+						<input th:field="*{imagem}" th:errorclass="is-invalid" class="form-control" name="imagem" placeholder="url da imagem"/>
+						<small>Foto do perfil do aluno</small>
+						<div class="invalid-feedback" th:errors="*{imagem}">Erros da url da imagem</div>
+					</div>
+					
+					<button class="btn btn-primary" type="submit">Cadastrar</button>
+					
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

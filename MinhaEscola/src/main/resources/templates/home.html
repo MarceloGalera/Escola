@@ -1,0 +1,50 @@
+<html>
+	<head th:replace="~{base :: head}"></head>
+	<style>
+		.formatacao {
+			font-size: 1.2rem;
+			font-weight: 600;
+		}
+	</style>
+	<body>
+		<div th:replace="~{base :: logo}"></div>
+		<div class="container">
+			<div th:replace="~{base :: titulo('Alunos(as)')}"></div>
+			<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
+				<div class="navbar-nav">
+					<a th:classappend="${ano} == null ? 'active'" class="nav-item nav-link" href="/home">Todos</a>
+					<a th:classappend="${ano} == 'primeiro' ? 'active' " class="nav-item nav-link" href="/home/primeiro">1º Colegial</a>
+					<a th:classappend="${ano} == 'segundo' ? 'active' " class="nav-item nav-link" href="/home/segundo">2º Colegial</a>
+					<a th:classappend="${ano} == 'terceiro' ? 'active' " class="nav-item nav-link" href="/home/terceiro">3º Colegial</a>
+				</div>
+				<a href="/aluno/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
+			</nav>
+			<div class=" card mb-3" th:each="aluno : ${alunos}">
+				<div class="card-header" th:text="${aluno.nome}" >Nome do Aluno</div>
+				<div class="card-body">
+				<div class="row d-flex justify-content-between">
+					<div class="row">
+						<div class="formatacao ml-5"> Ano do(a) Aluno(a):</div>
+						<div class="mb-3 ml-2 mt-1" th:text="${aluno.ano}"></div>
+					</div>
+					<div class="row">
+						<div class="formatacao mr-2">Número de Sala do(a) Aluno(a):</div>
+						<div class="mb-3 mr-5 mt-1" th:text="${aluno.numeroDeSala}"></div>
+					</div>
+				</div>
+					<div class="row">
+						<div class="col-12 col-sm-8 mb-3" >
+							<div>
+								<textarea class="form-control" th:text="${aluno.descricao}">Descrição do aluno</textarea>
+							</div>
+						</div>
+						<div class="col-12 col-sm-4">
+							<img class="img-thumbnail" th:src="${aluno.imagem}" src=""/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</body>
+
+</html>
